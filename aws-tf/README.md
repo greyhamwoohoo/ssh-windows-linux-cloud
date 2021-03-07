@@ -1,6 +1,8 @@
 # Terraform up a Linux and Windows box 
 Terraform up a Linux and Windows box, clone a Git Repository on each box (via user-data) and run the setup scripts from that Repository. 
 
+Can clone Public or Private Github Repos
+
 ## Quick Start
 From the terraform folder:
 

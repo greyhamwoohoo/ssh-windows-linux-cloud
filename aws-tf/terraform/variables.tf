@@ -1,3 +1,9 @@
+# If true, the Github Repository is Private. In which case: github_pat MUST be specified. 
+variable "github_repo_is_private" {
+  type    = bool
+  default = false
+}
+
 # PrivateGithubRepo: Provide a Github PAT that is capable of cloning private repositories. 
 variable "github_pat" {
   type    = string

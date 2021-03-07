@@ -1,0 +1,26 @@
+#! /bin/bash
+#
+# Bootstrap an Amazon-Linux EC2 by cloning a private Github Repo and running the aws-tf/setup/amazon-linux.sh script. 
+#
+# This user-data content runs as 'root'. The folder execution context is /
+#
+set -ex
+
+yum update -y
+
+yum install git -y
+
+git clone https://github.com/${github_user_name}/${github_repo_name}.git app-infra
+history -c
+
+cd /app-infra
+git checkout ${github_commit}
+git remote remove origin 
+
+cd /app-infra/aws-tf/setup
+chmod +x amazon-linux.sh
+./amazon-linux.sh
+
+chown -R ec2-user:ec2-user /app-infra
+
+history -c

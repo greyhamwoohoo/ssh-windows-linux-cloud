@@ -17,3 +17,8 @@ Run the following from the 'terraform' folder to generate the public / private k
 ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "private-key-to-access-linux-box"
 mv ./ssh-windows-to-linux ./ssh-windows-to-linux.pem
 ```
+
+## Considerations
+If the bootstrapping/ files changes, the 'terraform plan' will detect it and recreate the instance. 
+
+However: if changes are made in the remote repo, you will need to use 'terraform taint' to cause the instance to be recreated and the new Git Repo scripts to run.

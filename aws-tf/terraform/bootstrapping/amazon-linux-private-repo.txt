@@ -10,9 +10,16 @@ yum update -y
 yum install git -y
 
 git clone https://${github_user_name}:${github_pat}@github.com/${github_user_name}/${github_repo_name}.git app-infra
-chown -R ec2-user:ec2-user app-infra
-cd app-infra
+history -c
+
+cd /app-infra
 git checkout ${github_commit}
 git remote remove origin 
+
+cd /app-infra/setup
+chmod +x amazon-linux.sh
+./amazon-linux.sh
+
+chown -R ec2-user:ec2-user /app-infra
 
 history -c

@@ -1,4 +1,4 @@
-# ssh-windows-linux-ssh
+# ssh-windows-linux-cloud
 Terraform up AWS Windows + Linux EC2 instances with a few golden threads for future reference:
 
 1. Both instances are configured with the same KeyPair

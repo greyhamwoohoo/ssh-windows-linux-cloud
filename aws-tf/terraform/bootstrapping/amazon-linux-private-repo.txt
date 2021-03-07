@@ -1,0 +1,17 @@
+#! /bin/bash
+#
+# PrivateGithubRepo:
+# This user-data content runs as 'root'
+# A git repository (private) is cloned to /app-infra and ownership set to ec2-user
+# The folder context of user-data is /
+#
+yum update -y
+
+yum install git -y
+
+git clone https://${github_user_name}:${github_pat}@github.com/${github_user_name}/${github_repo_name}.git app-infra
+chown -R ec2-user:ec2-user app-infra
+cd app-infra
+git remote remove origin 
+
+history -c

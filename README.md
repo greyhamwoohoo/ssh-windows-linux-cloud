@@ -1,4 +1,4 @@
-# vsts-windows-linux-ssh
+# ssh-windows-linux-ssh
 AWS Windows + Linux instances using Terraform with a few reference implementations:
 
 1. Both instances are configured with the same KeyPair

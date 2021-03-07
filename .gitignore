@@ -4,6 +4,11 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+.terraform.*
+
+# Key files
+*.pem
+*.pub
 
 # Vars
 *.tfvars

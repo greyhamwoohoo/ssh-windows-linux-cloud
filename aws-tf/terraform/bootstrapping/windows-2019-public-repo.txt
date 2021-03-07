@@ -1,6 +1,6 @@
 <powershell>
 #
-# Bootstrap a Windows 2019 EC2 by cloning a private Github Repo and running the aws-tf/setup/windows-2019.ps1 script. 
+# Bootstrap a Windows 2019 EC2 by cloning a public Github Repo and running the aws-tf/setup/windows-2019.ps1 script. 
 #
 # This user-data content runs as 'Administrator'. The folder execution context is C:\Windows\System32
 #

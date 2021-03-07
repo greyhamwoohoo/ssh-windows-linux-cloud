@@ -65,7 +65,7 @@ resource "aws_instance" "windows_box" {
   ami             = "ami-0e952010fc45db537"
   instance_type   = "t2.small"
   security_groups = [aws_security_group.allow_rdp_from_everywhere.name]
-  user_data_base64 = base64encode(templatefile("./bootstrapping/windows-2019.txt", { private_key_content = file(var.ssh_windows_to_linux_private_key_path) }))
+  user_data_base64 = base64encode(templatefile("./bootstrapping/windows-2019-private-repo.txt", { private_key_content = file(var.ssh_windows_to_linux_private_key_path), github_pat = var.github_pat, github_user_name = var.github_user_name, github_repo_name = var.github_repo_name, github_commit = var.github_commit }))
   key_name        = "ssh-windows-to-linux"
 }
 

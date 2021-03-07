@@ -1,0 +1,21 @@
+<powershell>
+$VerbosePreference="Continue"
+
+# Install Chocolatey...
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco install git.install -y
+$env:PATH="$env:PATH;C:\Program Files\Git\cmd"
+
+cd $env:USERPROFILE
+git clone https://${github_user_name}:${github_pat}@github.com/${github_user_name}/${github_repo_name}.git app-infra
+
+#
+# Use environment variables to pass values
+#
+$env:TF_PRIVATE_KEY_CONTENT="${private_key_content}"
+$env:TF_GITHUB_USER_NAME="${github_user_name}"
+$env:TF_GITHUB_REPO_NAME="${github_repo_name}"
+
+cd app-infra/aws-tf/setup
+./windows-2019.ps1
+</powershell>

@@ -1,3 +1,7 @@
+#
+# Script to run on Windows 2019. 
+# Variables are passed with TF_ prefix (see terraform/bootstrapping/windows-2019-private-repo.txt for more info)
+#
 Set-Location $env:USERPROFILE
 
 Set-Service -Name "ssh-agent" -StartupType Automatic

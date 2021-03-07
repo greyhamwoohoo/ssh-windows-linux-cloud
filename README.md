@@ -3,7 +3,7 @@ AWS Windows + Linux instances using Terraform with a few implementations for fut
 
 1. Both instances are configured with the same KeyPair
 2. The Windows Box is configured with the KeyPair Private Key (via user-data) so that zero m,manual configuration access to the Linux Box is possible with ssh -o .. 
-3. The Linux Box will clone a Git Repository (possibly Private) and run the setup script from that repository. 
+3. Both boxes will clone a Git Repository (possibly Private) and run the setup script from that repository for that box type. 
 
 Other than security groups that wrap each instance (allowing RDP and SSH from anywhere in the world), no consideration has been paid to security. 
 
@@ -13,7 +13,7 @@ Other than security groups that wrap each instance (allowing RDP and SSH from an
 | aws-tf | Terraform on AWS |
 
 ## Private Github Repositories
-Terraform will add 'bootstrapping' code to the Linux machine that will clone a Github repository and then run scripts from that repository; if the setup scripts are in a private Github Repository, you will need to create a custom PAT and modify a few scripts in this repository. 
+Terraform will add 'bootstrapping' code to the Linux and Windows machine that will clone a Github repository and then run scripts from that repository; if the setup scripts are in a private Github Repository, you will need to create a custom PAT and modify a few scripts in this repository. 
 
 Search the repository for 'PrivateGithubRepo' for more information. 
 

@@ -1,5 +1,5 @@
-# Terraform up a Linux box 
-Terraform up a Linux box, clone a Git Repository on that box (via user-data) and run the setup scripts from that Repository. 
+# Terraform up a Linux and Windows box 
+Terraform up a Linux and Windows box, clone a Git Repository on each box (via user-data) and run the setup scripts from that Repository. 
 
 ## Quick Start
 From the terraform folder:

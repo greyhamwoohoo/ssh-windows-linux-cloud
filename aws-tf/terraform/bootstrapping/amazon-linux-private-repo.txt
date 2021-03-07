@@ -1,10 +1,11 @@
 #! /bin/bash
 #
-# PrivateGithubRepo:
-# This user-data content runs as 'root'
-# A git repository (private) is cloned to /app-infra and ownership set to ec2-user
-# The folder context of user-data is /
+# Bootstrap an Amazon-Linux EC2 by cloning a private Github Repo and running the aws-tf/setup/amazon-linux.sh script. 
 #
+# This user-data content runs as 'root'. The folder execution context is /
+#
+set -ex
+
 yum update -y
 
 yum install git -y

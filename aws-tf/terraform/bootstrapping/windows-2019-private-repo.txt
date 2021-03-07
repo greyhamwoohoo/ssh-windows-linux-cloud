@@ -1,5 +1,11 @@
 <powershell>
+#
+# Bootstrap a Windows 2019 EC2 by cloning a private Github Repo and running the aws-tf/setup/windows-2019.ps1 script. 
+#
+# This user-data content runs as 'Administrator'. The folder execution context is C:\Windows\System32
+#
 $VerbosePreference="Continue"
+$ErrorActionPreference="Stop"
 
 # Install Chocolatey...
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -10,7 +16,7 @@ cd $env:USERPROFILE
 git clone https://${github_user_name}:${github_pat}@github.com/${github_user_name}/${github_repo_name}.git app-infra
 
 #
-# Use environment variables to pass values
+# Use environment variables to pass values to the setup script
 #
 $env:TF_PRIVATE_KEY_CONTENT="${private_key_content}"
 $env:TF_GITHUB_USER_NAME="${github_user_name}"

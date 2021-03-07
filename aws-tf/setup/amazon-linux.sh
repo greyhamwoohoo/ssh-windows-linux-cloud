@@ -1,6 +1,6 @@
 #! /bin/bash
 # 
-# Install something to show the setup script is working
+# Script to run on Amazon-Linux. 
 #
 yum update -y
 

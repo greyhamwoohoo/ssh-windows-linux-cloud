@@ -16,7 +16,7 @@ cd /app-infra
 git checkout ${github_commit}
 git remote remove origin 
 
-cd /app-infra/setup
+cd /app-infra/aws-tf/setup
 chmod +x amazon-linux.sh
 ./amazon-linux.sh
 

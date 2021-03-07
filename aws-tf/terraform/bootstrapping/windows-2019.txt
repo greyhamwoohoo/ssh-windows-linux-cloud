@@ -1,0 +1,13 @@
+<powershell> 
+Set-Service -Name "ssh-agent" -StartupType Automatic
+Start-Service ssh-agent
+
+cd $env:USERPROFILE
+New-Item -Type Directory -Name ".ssh" -ErrorAction SilentlyContinue
+
+$value = "${private_key_content}"
+
+$value | Out-File -FilePath ~/.ssh/ssh-windows-to-linux.pem -Encoding ASCII
+
+ssh-add .ssh/ssh-windows-to-linux.pem 
+</powershell>

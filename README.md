@@ -1,9 +1,11 @@
 # ssh-windows-linux-ssh
-AWS Windows + Linux instances using Terraform with a few reference implementations:
+AWS Windows + Linux instances using Terraform with a few implementations for future reference:
 
 1. Both instances are configured with the same KeyPair
-2. The Windows Box is configured with the KeyPair Private Key (via user-data) so that direct access to the Linux Box is possible with ssh -o .. 
+2. The Windows Box is configured with the KeyPair Private Key (via user-data) so that zero m,manual configuration access to the Linux Box is possible with ssh -o .. 
 3. The Linux Box will clone a Git Repository (possibly Private) and run the setup script from that repository. 
+
+Other than security groups that wrap each instance (allowing RDP and SSH from anywhere in the world), no consideration has been paid to security. 
 
 ## Implementations
 | Folder | Implementation   |

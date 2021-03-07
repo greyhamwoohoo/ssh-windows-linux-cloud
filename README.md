@@ -13,7 +13,7 @@ Other than security groups that wrap each instance (allowing RDP and SSH from an
 | aws-tf | Terraform on AWS |
 
 ## Private Github Repositories
-Terraform will add 'bootstrapping' code to the Linux and Windows machine (via user-data) that will clone a Github repository and then run scripts from that repository; if the setup scripts are in a private Github Repository, you will need to create a custom PAT and modify a few scripts in this repository. 
+Terraform will add 'bootstrapping' code to the Linux and Windows machine (via user-data) that will clone a Github repository and then run scripts from that repository; if the Github Repository is private, you will need to create a custom PAT and set the 'github_repo_is_private' variable to 'true'. 
 
 Search the repository for 'PrivateGithubRepo' / variables.tf for more information. 
 

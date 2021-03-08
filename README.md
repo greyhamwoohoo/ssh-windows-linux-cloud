@@ -5,6 +5,7 @@ Terraform manage AWS Windows + Linux EC2 instances with a few common use cases d
 | ------ | ---------------- |
 | aws-tf | Creates a Windows + Linux box with SSH private key configured on the Windows box |
 | aws-tf-github-pat | aws-tf + a Github repository is cloned on the Linux and Windows box using a PAT with user-data; scripts from the cloned repo are executed |
+| aws-tf-github-deploy-key | aws-tf + a Github repository is cloned on the Linux and Windows box using a Github Deploy Key. Minimal (nothing is run from clone repo) |
 
 Other than security groups that wrap each instance (allowing RDP and SSH from anywhere in the world), no consideration has been paid to security. 
 

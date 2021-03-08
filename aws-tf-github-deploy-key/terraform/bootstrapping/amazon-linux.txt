@@ -1,0 +1,15 @@
+#! /bin/bash
+#
+# Bootstrap an Amazon-Linux EC2 by cloning a public Github Repo and running the aws-tf-github-pat/setup/amazon-linux.sh script. 
+#
+# This user-data content runs as 'root'. The folder execution context is /
+#
+set -ex
+
+yum update -y
+
+yum install git -y
+
+#
+# TODO:Persist ssh key and clone repo
+#

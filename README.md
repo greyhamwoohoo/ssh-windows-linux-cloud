@@ -1,21 +1,12 @@
 # ssh-windows-linux-cloud
-Terraform up AWS Windows + Linux EC2 instances with a few golden threads for future reference:
+Terraform manage AWS Windows + Linux EC2 instances with a few common use cases demonstrated:
 
-1. Both instances are configured with the same KeyPair
-2. The Windows Box is set up with the KeyPair Private Key (via user-data) so that zero manual configuration access to the Linux Box is possible with ssh -o .. ec2-user@...
-3. Both boxes will clone a Git Repository (possibly Private) and run the setup script from that repository for that box type. 
-
-Other than security groups that wrap each instance (allowing RDP and SSH from anywhere in the world), no consideration has been paid to security. 
-
-## Implementations
 | Folder | Implementation   |
 | ------ | ---------------- |
-| aws-tf | Terraform on AWS |
+| aws-tf | Creates a Windows + Linux box with SSH private key configured on the Windows box |
+| aws-tf-github-pat | aws-tf + a Github repository is cloned on the Linux and Windows box using a PAT with user-data; scripts from the cloned repo are executed |
 
-## Private Github Repositories
-Terraform will add 'bootstrapping' code to the Linux and Windows machine (via user-data) that will clone a Github repository and then run scripts from that repository; if the Github Repository is private, you will need to create a custom PAT and set the 'github_repo_is_private' variable to 'true'. 
-
-Search the repository for 'PrivateGithubRepo' / variables.tf for more information. 
+Other than security groups that wrap each instance (allowing RDP and SSH from anywhere in the world), no consideration has been paid to security. 
 
 # References
 | Description | Link |

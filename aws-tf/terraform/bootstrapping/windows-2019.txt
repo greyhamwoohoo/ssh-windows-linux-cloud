@@ -1,0 +1,18 @@
+<powershell>
+#
+# This user-data content runs as 'Administrator'. The folder execution context is C:\Windows\System32
+#
+$VerbosePreference="Continue"
+$ErrorActionPreference="Stop"
+
+Set-Location $env:USERPROFILE
+
+Set-Service -Name "ssh-agent" -StartupType Automatic
+Start-Service ssh-agent
+
+New-Item -Type Directory -Name ".ssh" -ErrorAction SilentlyContinue
+
+"${private_key_content}" | Out-File -FilePath ~/.ssh/ssh-windows-to-linux.pem -Encoding ASCII
+
+ssh-add .ssh/ssh-windows-to-linux.pem 
+</powershell>

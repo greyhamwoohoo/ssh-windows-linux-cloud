@@ -2,6 +2,8 @@
 #
 # This user-data content runs as 'Administrator'. The folder execution context is C:\Windows\System32
 #
+# The Github Repo (github_repo_name) is cloned into ~/(github_repo_name) using the Deploy Key
+#
 $VerbosePreference="Continue"
 $ErrorActionPreference="Stop"
 

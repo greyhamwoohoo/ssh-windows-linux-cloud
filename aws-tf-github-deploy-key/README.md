@@ -1,7 +1,5 @@
 # Terraform up a Linux and Windows box 
-Terraform up a Linux and Windows EC2 box and clones a Github repo (using a Github Deploy Key). 
-
-STATUS: Windows Box (done); Linux Box (Todo)
+Terraform up a Linux and Windows EC2 box and clones a Github repo using a Github Deploy Key via user-data
 
 Also configures the Windows box with the private SSH Key; see aws-tf for more information. 
 
@@ -38,7 +36,7 @@ ssh-keygen.exe -b 2048 -t rsa -f ./github-deploy-key -N '""' -m PEM -C "github-d
 mv ./github-deploy-key ./github-deploy-key.pem
 ```
 
-Then add the Public Key to Github
+Then add the Public Key to Github.
 
 ## Connect from the Windows Box to Linux Box
 After Terraforming up, RDP to the Windows Box and log in as Administrator. 

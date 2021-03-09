@@ -55,7 +55,7 @@ resource "aws_instance" "linux_box" {
   ami              = "ami-075a72b1992cb0687"
   instance_type    = "t2.small"
   security_groups  = [aws_security_group.allow_ssh_from_everywhere.name]
-  user_data_base64 = base64encode(templatefile("./bootstrapping/amazon-linux.txt", { github_user_name = var.github_user_name, github_repo_name = var.github_repo_name, github_commit = var.github_commit }))
+  user_data_base64 = base64encode(templatefile("./bootstrapping/amazon-linux.txt", { github_deploy_private_key_content = base64encode(file(var.github_deploy_key_private_key_path)), github_user_name = var.github_user_name, github_repo_name = var.github_repo_name, github_commit = var.github_commit }))
   key_name         = "ssh-windows-to-linux"
 
   depends_on = [aws_key_pair.ssh_windows_to_linux]

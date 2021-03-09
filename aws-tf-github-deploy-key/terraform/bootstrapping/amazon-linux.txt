@@ -2,7 +2,7 @@
 #
 # This user-data content runs as 'root'. The folder execution context is /
 $
-# The Github Repo (github_repo_name) is cloned into ~/(github_repo_name) using the Deploy Key
+# The Github Repo (github_repo_name) is cloned into /(github_repo_name) using the Deploy Key
 #
 set -ex
 

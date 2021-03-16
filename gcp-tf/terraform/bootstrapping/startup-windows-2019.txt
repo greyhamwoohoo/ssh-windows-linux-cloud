@@ -1,0 +1,20 @@
+#
+# Author: github.com/greyhamwoohoo
+#
+# Startup Scripts are run as System every time the machine starts. 
+# Reference: https://cloud.google.com/compute/docs/startupscript
+#
+$DebugPreference="Continue"
+$InformationPreference="Continue"
+$VerbosePreference="Continue"
+$ErrorActionPreference="Stop"
+
+$timeStamp = [System.DateTime]::Now.ToString("yyyyMMddHHmmssfff")
+$outputPath = "C:\temp\startup-$($timeStamp).txt"
+Write-Information "OutputPath: $($outputPath)"
+
+New-Item c:\\temp -Type Directory -ErrorAction SilentlyContinue
+& {
+    whoami
+    Get-Location
+} *> $outputPath

@@ -1,6 +1,12 @@
 # ssh-windows-linux-cloud
-Terraform manage AWS Windows + Linux EC2 instances with a few common use cases demonstrated:
+Terraform manage Windows + Linux instances. The Linux Box acts as the 'server' with the public SSH key; the Windows Box acts as the 'client' with the private SSH Key placed and configured by these scripts. Various implementations are provided. 
 
+## Security Caution
+All of these solutions use instance 'meta-data' in some form (user-data in AWS; meta-data in GCP). Yes: the private key is available in the metadata and therefore available to anything running in the instance(s). The security implications vary depending on your cloud provider. For a more secure solution, use whatever least privelege techniques you normally use to secure your sensitive data.
+
+Decide if you can live with these security implications (HINT: assume you can't in Production, but probably can in ephemeral test environments for a large class of use cases).
+
+# AWS
 | Folder | Implementation   |
 | ------ | ---------------- |
 | aws-tf | Creates a Windows + Linux box with SSH private key configured on the Windows box |
@@ -9,6 +15,11 @@ Terraform manage AWS Windows + Linux EC2 instances with a few common use cases d
 | aws-tf-docker | Creates a Windows + Linux box with SSH private key configured on the Windows box; the Windows Docker Client can drive the Docker Daemon |
 
 Other than security groups that wrap each instance (allowing RDP and SSH from anywhere in the world), no consideration has been paid to security. 
+
+# GCP
+| Folder | Implementation   |
+| ------ | ---------------- |
+| gcp-tf | Creates a Windows + Linux box with SSH private key placed on the Windows box; sysprep and startup scripts run and log outputs |
 
 # References
 | Description | Link |
@@ -19,3 +30,5 @@ Other than security groups that wrap each instance (allowing RDP and SSH from an
 | Location on Windows of cloud init / user data runs | C:\ProgramData\Amazon\EC2-Windows\Launch\Log | 
 | Create SSH Key Pair within Terraform        | https://stackoverflow.com/questions/49743220/how-do-i-create-an-ssh-key-in-terraform |
 | Install Docker on AWS Linux                 | https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html | 
+| AWS: Security implications of metadata and userdata | https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html |
+| GCP: Security implications of instances metadata | https://cloud.google.com/compute/docs/storing-retrieving-metadata |

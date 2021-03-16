@@ -1,5 +1,5 @@
 # ssh-windows-linux-cloud
-Terraform manage Windows + Linux instances. The Linux Box acts as the 'server' with the public SSH key; the Windows Box acts as the 'client' with the private SSH Key placed and configured by these scripts. Various implementations are provided. 
+Terraform manage Windows + Linux instances. The Linux Box acts as the 'server' with the public SSH key; the Windows Box acts as the 'client' with the private SSH Key placed and configured (or available). Various implementations are provided. 
 
 ## Security Caution
 All of these solutions use instance 'meta-data' in some form (user-data in AWS; meta-data in GCP). Yes: the private key is available in the metadata and therefore available to anything running in the instance(s). The security implications vary depending on your cloud provider. For a more secure solution, use whatever least privelege techniques you normally use to secure your sensitive data.
@@ -19,7 +19,7 @@ Other than security groups that wrap each instance (allowing RDP and SSH from an
 # GCP
 | Folder | Implementation   |
 | ------ | ---------------- |
-| gcp-tf | Creates a Windows + Linux box with SSH private key placed on the Windows box; sysprep and startup scripts run and log outputs |
+| gcp-tf | Creates a Windows + Linux box with SSH private key accessible from the Windows box; sysprep and startup scripts run and log outputs |
 
 # References
 | Description | Link |

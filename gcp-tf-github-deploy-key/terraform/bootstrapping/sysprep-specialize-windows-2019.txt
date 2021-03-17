@@ -1,0 +1,23 @@
+#
+# Author: github.com/greyhamwoohoo
+#
+# Sysprep Specialize Scripts are run as System during the Sysprep stage. They are run exactly once. 
+# Reference: https://cloud.google.com/compute/docs/startupscript
+#
+$DebugPreference="Continue"
+$InformationPreference="Continue"
+$VerbosePreference="Continue"
+$ErrorActionPreference="Stop"
+
+# Set-Service -Name "ssh-agent" -StartupType Automatic
+# Start-Service "ssh-agent"
+
+$timeStamp = [System.DateTime]::Now.ToString("yyyyMMddHHmmssfff")
+$outputPath = "C:\temp\sysprep-$($timeStamp).txt"
+Write-Information "OutputPath: $($outputPath)"
+
+New-Item c:\\temp -Type Directory -ErrorAction SilentlyContinue
+& {
+    whoami
+    Get-Location
+} *> $outputPath

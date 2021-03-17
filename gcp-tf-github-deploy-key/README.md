@@ -1,7 +1,7 @@
 # Terraform up a Linux and Windows box 
-Terraform up a Linux and Windows EC2 box and clones a Github repo using a Github Deploy Key via user-data.  See the bootstrapping scripts for the cloned repo location (depends on Windows/Linux).
+Terraform up a Linux and Windows box and clones Github repo using a Github Deploy Key via meta-data. See the bootstrapping scripts for the cloned repo location (depends on Windows/Linux).
 
-Also configures the Windows box with the private SSH Key; see aws-tf for more information. 
+Also configures the Windows box with the private SSH Key to access the Linux box; see gcp-tf for more information. 
 
 ## Quick Start
 From the terraform folder:
@@ -39,13 +39,20 @@ mv ./github-deploy-key ./github-deploy-key.pem
 Then add the Public Key to Github.
 
 ## Connect from the Windows Box to Linux Box
-After Terraforming up, RDP to the Windows Box and log in as Administrator. 
+After Terraforming up, RDP to the Windows Box and log in as the user.
+
+To connect to the Linux box, can pull the private key right out of the meta-data yourself in your folder:
 
 ```powershell
-ssh -o "StrictHostKeyChecking=no" ec2-user@the-public-or-internal-ip-of-the-linux-box
+Invoke-RestMethod "http://metadata.google.internal/computeMetadata/v1/instance/attributes/private-key-content" -Headers @{"Metadata-Flavor"="Google"} | Out-File -FilePath  ~/ssh-windows-to-linux.pem -Encoding ASCII
+
+ssh -o "StrictHostKeyChecking=no" -i ~/ssh-windows-to-linux.pem youruser@the_ip_of_the_linux_box
 ```
 
 Depending on the alignment of the stars, direction of the wind and phase of the moon, you will get a shell to the Linux box. 
+
+## To view the Cloned Repository
+The repo is cloned to the root folder of each machine. 
 
 # References
 | Description | Link |

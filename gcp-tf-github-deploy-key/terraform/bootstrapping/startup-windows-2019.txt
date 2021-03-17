@@ -1,0 +1,42 @@
+#
+# Author: github.com/greyhamwoohoo
+#
+# Startup Scripts are run as System every time the machine starts. 
+# Reference: https://cloud.google.com/compute/docs/startupscript
+#
+$DebugPreference="Continue"
+$InformationPreference="Continue"
+$VerbosePreference="Continue"
+$ErrorActionPreference="Stop"
+
+$timeStamp = [System.DateTime]::Now.ToString("yyyyMMddHHmmssfff")
+$outputPath = "C:\temp\startup-$($timeStamp).txt"
+Write-Information "OutputPath: $($outputPath)"
+
+New-Item c:\\temp -Type Directory -ErrorAction SilentlyContinue
+& {
+    # Install Chocolatey...
+    Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    choco install git.install -y
+    $env:PATH="$env:PATH;C:\Program Files\Git\cmd"
+
+    #
+    # Only clone the repo if it doesn't already exist; I was unable to get this working from sysprep-specialize
+    #   
+    if(-Not (Test-Path "C:/temp/github-deploy-key.pem")) { 
+
+        #
+        # Place the keys and everything we need in the temp folder
+        #
+        cd C:/temp
+        "${github_deploy_private_key_content}" | Out-File -FilePath C:/temp/github-deploy-key.pem -Encoding ASCII
+        icacls .\github-deploy-key.pem /inheritance:r
+
+        #
+        # Clone using the deploy key (this needs at least 2.30.0+ for the GIT_SSH_COMMAND)
+        #
+        $env:GIT_SSH_COMMAND="C:/Windows/System32/OpenSSH/ssh.exe -o StrictHostKeyChecking=no -i C:/temp/github-deploy-key.pem"
+        cd /
+        git clone git@github.com:${github_user_name}/${github_repo_name}    
+    }
+} *> $outputPath

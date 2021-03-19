@@ -1,0 +1,22 @@
+<powershell>
+#
+# This user-data content runs as 'Administrator'. The folder execution context is C:\Windows\System32
+#
+$VerbosePreference="Continue"
+$ErrorActionPreference="Stop"
+
+# Install Chocolatey...
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco install awscli -y
+
+Set-Location $env:USERPROFILE
+
+Set-Service -Name "ssh-agent" -StartupType Automatic
+Start-Service ssh-agent
+
+New-Item -Type Directory -Name ".ssh" -ErrorAction SilentlyContinue
+
+& "C:\Program Files\Amazon\AWSCLIV2\aws.exe" s3 cp s3://ssh-windows-linux-cloud/ssh-windows-to-linux.pem "$($env:USERPROFILE)/.ssh/ssh-windows-to-linux.pem"
+
+ssh-add .ssh/ssh-windows-to-linux.pem 
+</powershell>

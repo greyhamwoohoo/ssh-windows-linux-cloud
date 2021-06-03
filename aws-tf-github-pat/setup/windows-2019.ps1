@@ -9,6 +9,6 @@ Start-Service ssh-agent
 
 New-Item -Type Directory -Name ".ssh" -ErrorAction SilentlyContinue
 
-$env:TF_PRIVATE_KEY_CONTENT | Out-File -FilePath ~/.ssh/ssh-windows-to-linux.pem -Encoding ASCII
+$env:TF_PRIVATE_KEY_CONTENT | Out-File -FilePath ~/.ssh/ssh-windows-to-linux.key -Encoding ASCII
 
-ssh-add .ssh/ssh-windows-to-linux.pem 
+ssh-add .ssh/ssh-windows-to-linux.key 

@@ -16,24 +16,24 @@ From the terraform folder:
 ## To create the Github Deploy Key
 Terraform will bootstrap both boxes with the Github Deploy Key and clone the repo. 
 
-You must create a Github Deploy Key for a private repository. These scripts will add the private key called 'github-deploy-key.pem' to each host. 
+You must create a Github Deploy Key for a private repository. These scripts will add the private key called 'github-deploy-key.key' to each host. 
 
 See variables.tf for more information. 
 
 ## To create the Public / Private KeyPair
-Run the following from the 'terraform' folder to generate the SSH public / private key pair:
+Run the following from the 'terraform' folder to generate the SSH public / private key pair (.pub, .key):
 
 ```bash
-ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "private-key-to-access-linux-box"
-mv ./ssh-windows-to-linux ./ssh-windows-to-linux.pem
+ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "the-public-key"
+mv ./ssh-windows-to-linux ./ssh-windows-to-linux.key
 ```
 
 ## To create the Github Deploy Key
 Run the following from the 'terraform' folder to generate the Github deploy key:
 
 ```bash
-ssh-keygen.exe -b 2048 -t rsa -f ./github-deploy-key -N '""' -m PEM -C "github-deploy-key"
-mv ./github-deploy-key ./github-deploy-key.pem
+ssh-keygen.exe -b 2048 -t rsa -f ./github-deploy-key -N '""' -m PEM -C "github-deploy-public-key"
+mv ./github-deploy-key ./github-deploy-key.key
 ```
 
 Then add the Public Key to Github.

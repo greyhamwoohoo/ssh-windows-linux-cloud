@@ -16,16 +16,16 @@ variable "github_commit" {
   default = "main"
 }
 
-# Path of the Github Deploy Key .pem file
+# Path of the Github Deploy Key .key file
 variable "github_deploy_key_private_key_path" {
   type    = string
-  default = "not-a-valid-pem-path"
+  default = "not-a-valid-key-path"
 }
 
-# Fully qualified path of the .pem path. Probably: ./ssh-windows-linux-cloud.pem 
+# Fully qualified path of the .key path. Probably: ./ssh-windows-linux-cloud.pkeyem 
 variable "ssh_windows_to_linux_private_key_path" {
   type    = string
-  default = "not-a-valid-pem-path"
+  default = "not-a-valid-key-path"
 }
 
 variable "linux_username" {

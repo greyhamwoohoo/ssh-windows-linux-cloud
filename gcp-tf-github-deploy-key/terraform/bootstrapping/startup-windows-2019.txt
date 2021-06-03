@@ -23,19 +23,19 @@ New-Item c:\\temp -Type Directory -ErrorAction SilentlyContinue
     #
     # Only clone the repo if it doesn't already exist; I was unable to get this working from sysprep-specialize
     #   
-    if(-Not (Test-Path "C:/temp/github-deploy-key.pem")) { 
+    if(-Not (Test-Path "C:/temp/github-deploy-key.key")) { 
 
         #
         # Place the keys and everything we need in the temp folder
         #
         cd C:/temp
-        "${github_deploy_private_key_content}" | Out-File -FilePath C:/temp/github-deploy-key.pem -Encoding ASCII
-        icacls .\github-deploy-key.pem /inheritance:r
+        "${github_deploy_private_key_content}" | Out-File -FilePath C:/temp/github-deploy-key.key -Encoding ASCII
+        icacls .\github-deploy-key.key /inheritance:r
 
         #
         # Clone using the deploy key (this needs at least 2.30.0+ for the GIT_SSH_COMMAND)
         #
-        $env:GIT_SSH_COMMAND="C:/Windows/System32/OpenSSH/ssh.exe -o StrictHostKeyChecking=no -i C:/temp/github-deploy-key.pem"
+        $env:GIT_SSH_COMMAND="C:/Windows/System32/OpenSSH/ssh.exe -o StrictHostKeyChecking=no -i C:/temp/github-deploy-key.key"
         cd /
         git clone git@github.com:${github_user_name}/${github_repo_name}    
     }

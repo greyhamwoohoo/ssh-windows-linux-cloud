@@ -87,7 +87,7 @@ resource "aws_iam_role_policy" "windows_instance_role_policy" {
         "Action" : [
           "s3:GetObject",
         ],
-        "Resource" : ["arn:aws:s3:::ssh-windows-linux-cloud/ssh-windows-to-linux.pem"]
+        "Resource" : ["arn:aws:s3:::ssh-windows-linux-cloud/ssh-windows-to-linux.key"]
       }
     ]
   })

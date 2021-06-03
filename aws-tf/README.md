@@ -1,5 +1,5 @@
 # Terraform up a Linux and Windows box 
-Terraform up a Linux and Windows EC2 box and configure the Windows box with the private SSH Key. 
+Terraform up a Linux and Windows EC2 box.
 
 ## Quick Start
 From the terraform folder:
@@ -11,11 +11,11 @@ From the terraform folder:
 5. ... usual terraform lifecycle
 
 ## To create the Public / Private KeyPair
-Run the following from the 'terraform' folder to generate the public / private key pair:
+Run the following from the 'terraform' folder to generate the public / private key pair (.pub, .key):
 
 ```bash
-ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "private-key-to-access-linux-box"
-mv ./ssh-windows-to-linux ./ssh-windows-to-linux.pem
+ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "the-public-key"
+mv ./ssh-windows-to-linux ./ssh-windows-to-linux.key
 ```
 
 ## Connect from the Windows Box to Linux Box
@@ -26,4 +26,3 @@ ssh -o "StrictHostKeyChecking=no" ec2-user@the-public-or-internal-ip-of-the-linu
 ```
 
 Depending on the alignment of the stars, direction of the wind and phase of the moon, you will get a shell to the Linux box. 
-

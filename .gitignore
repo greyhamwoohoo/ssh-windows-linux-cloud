@@ -8,6 +8,7 @@
 
 # Key files
 *.pem
+*.key
 *.pub
 
 # Vars

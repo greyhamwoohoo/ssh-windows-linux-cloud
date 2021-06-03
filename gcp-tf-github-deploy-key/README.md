@@ -16,24 +16,24 @@ From the terraform folder:
 ## To create the Github Deploy Key
 Terraform will bootstrap both boxes with the Github Deploy Key and clone the repo. 
 
-You must create a Github Deploy Key for a private repository. These scripts will add the private key called 'github-deploy-key.pem' to each host. 
+You must create a Github Deploy Key for a private repository. These scripts will add the private key called 'github-deploy-key.key' to each host. 
 
 See variables.tf for more information. 
 
 ## To create the Public / Private KeyPair
-Run the following from the 'terraform' folder to generate the SSH public / private key pair:
+Run the following from the 'terraform' folder to generate the SSH public / private key pair (.pub, .key):
 
 ```bash
-ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "private-key-to-access-linux-box"
-mv ./ssh-windows-to-linux ./ssh-windows-to-linux.pem
+ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "the-public-key"
+mv ./ssh-windows-to-linux ./ssh-windows-to-linux.key
 ```
 
 ## To create the Github Deploy Key
 Run the following from the 'terraform' folder to generate the Github deploy key:
 
 ```bash
-ssh-keygen.exe -b 2048 -t rsa -f ./github-deploy-key -N '""' -m PEM -C "github-deploy-key"
-mv ./github-deploy-key ./github-deploy-key.pem
+ssh-keygen.exe -b 2048 -t rsa -f ./github-deploy-key -N '""' -m PEM -C "github-deploy-public-key"
+mv ./github-deploy-key ./github-deploy-key.key
 ```
 
 Then add the Public Key to Github.
@@ -44,9 +44,9 @@ After Terraforming up, RDP to the Windows Box and log in as the user.
 To connect to the Linux box, can pull the private key right out of the meta-data yourself in your folder:
 
 ```powershell
-Invoke-RestMethod "http://metadata.google.internal/computeMetadata/v1/instance/attributes/private-key-content" -Headers @{"Metadata-Flavor"="Google"} | Out-File -FilePath  ~/ssh-windows-to-linux.pem -Encoding ASCII
+Invoke-RestMethod "http://metadata.google.internal/computeMetadata/v1/instance/attributes/private-key-content" -Headers @{"Metadata-Flavor"="Google"} | Out-File -FilePath  ~/ssh-windows-to-linux.key -Encoding ASCII
 
-ssh -o "StrictHostKeyChecking=no" -i ~/ssh-windows-to-linux.pem youruser@the_ip_of_the_linux_box
+ssh -o "StrictHostKeyChecking=no" -i ~/ssh-windows-to-linux.key youruser@the_ip_of_the_linux_box
 ```
 
 Depending on the alignment of the stars, direction of the wind and phase of the moon, you will get a shell to the Linux box. 

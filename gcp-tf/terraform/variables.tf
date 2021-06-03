@@ -10,5 +10,5 @@ variable "ssh_windows_to_linux_public_key_path" {
 
 variable "ssh_windows_to_linux_private_key_path" {
   type    = string
-  default = "not-a-valid-pem-path"
+  default = "not-a-valid-key-path"
 }

@@ -1,13 +1,13 @@
 # Terraform up a Linux and Windows box 
 Terraform up a Linux and Windows EC2 box and configure the Windows box with the private SSH Key. 
 
-The Private SSH Key / .pem resides in an S3 bucket. 
+The Private SSH Key / .key resides in an S3 bucket. 
 
 ## Quick Start
 From the terraform folder:
 
 1. Create the Public / Private KeyPair (see below)
-2. Copy the private .pem to an S3 bucket (this example doesnt add any policy to the S3 bucket; the assumption is that it already exists).
+2. Copy the private .key to an S3 bucket (this example doesnt add any policy to the S3 bucket; the assumption is that it already exists).
    The bucket is hardcoded (currently) in the role in stack.tf (TODO:)
 3. Either create a terraform.tfvars or modify the variables.tf to include your values
 4. terraform init
@@ -15,11 +15,11 @@ From the terraform folder:
 6. ... usual terraform lifecycle
 
 ## To create the Public / Private KeyPair
-Run the following from the 'terraform' folder to generate the public / private key pair:
+Run the following from the 'terraform' folder to generate the public / private key pair (.pub, .key):
 
 ```bash
-ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "private-key-to-access-linux-box"
-mv ./ssh-windows-to-linux ./ssh-windows-to-linux.pem
+ssh-keygen.exe -b 2048 -t rsa -f ./ssh-windows-to-linux -N '""' -m PEM -C "the-public-key"
+mv ./ssh-windows-to-linux ./ssh-windows-to-linux.key
 ```
 
 ## Connect from the Windows Box to Linux Box

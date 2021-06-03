@@ -16,7 +16,7 @@ Start-Service ssh-agent
 
 New-Item -Type Directory -Name ".ssh" -ErrorAction SilentlyContinue
 
-& "C:\Program Files\Amazon\AWSCLIV2\aws.exe" s3 cp s3://ssh-windows-linux-cloud/ssh-windows-to-linux.pem "$($env:USERPROFILE)/.ssh/ssh-windows-to-linux.pem"
+& "C:\Program Files\Amazon\AWSCLIV2\aws.exe" s3 cp s3://ssh-windows-linux-cloud/ssh-windows-to-linux.key "$($env:USERPROFILE)/.ssh/ssh-windows-to-linux.key"
 
-ssh-add .ssh/ssh-windows-to-linux.pem 
+ssh-add .ssh/ssh-windows-to-linux.key 
 </powershell>
